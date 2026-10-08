@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" href="../img/favicon.png" />
+    <link rel="apple-touch-icon" href="../img/apple-touch-icon.png" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../css/general.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/queries.css" />
+
+    <title>Omnifood — Admin</title>
+  </head>
+  <body class="admin-page">
+    <header class="header admin-header">
+      <a href="../index.html">
+        <img class="logo" alt="Omnifood logo" src="../img/omnifood-logo.png" />
+      </a>
+
+      <nav class="main-nav">
+        <ul class="main-nav-list">
+          <li><a class="main-nav-link" href="../index.html">Website</a></li>
+          <li><a class="main-nav-link nav-cta" href="#admin">Admin Panel</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="admin-layout">
+      <aside class="admin-sidebar">
+        <h2 class="admin-sidebar-title">Admin Menu</h2>
+        <nav class="admin-sidebar-nav">
+          <a href="#admin" class="admin-sidebar-link admin-sidebar-link--active">Dashboard</a>
+          <a href="#recipe-management" class="admin-sidebar-link">Recipes</a>
+          <a href="#user-management" class="admin-sidebar-link">Users</a>
+        </nav>
+        <p class="admin-sidebar-note">Manage menu updates, user records, and content changes from one dashboard.</p>
+      </aside>
+
+      <section class="section-admin" id="admin">
+        <div class="container admin-content">
+          <span class="subheading">Admin Dashboard</span>
+          <h1 class="heading-secondary admin-title">Manage recipes and users</h1>
+          <p class="admin-subtext">Create, update, and manage food catalog and customer accounts.</p>
+        </div>
+
+        <div class="container admin-stats admin-content">
+          <article class="admin-stat-card">
+            <p class="admin-stat-label">Total recipes</p>
+            <p class="admin-stat-value" id="metric-recipes">0</p>
+          </article>
+          <article class="admin-stat-card">
+            <p class="admin-stat-label">Total users</p>
+            <p class="admin-stat-value" id="metric-users">0</p>
+          </article>
+          <article class="admin-stat-card">
+            <p class="admin-stat-label">Average rating</p>
+            <p class="admin-stat-value" id="metric-rating">0.0</p>
+          </article>
+        </div>
+
+        <div class="container grid grid--2-cols admin-grid admin-content">
+          <div class="admin-card" id="recipe-management">
+            <div class="admin-card-header">
+              <h3 class="heading-tertiary">Recipe management</h3>
+              <p>Manage dish type, calories, NutriScore, and rating.</p>
+            </div>
+            <form class="admin-form" id="recipe-form">
+              <input type="hidden" id="recipe-id" />
+              <div>
+                <label for="recipe-name">Dish name</label>
+                <input id="recipe-name" type="text" required />
+              </div>
+              <div>
+                <label for="recipe-type">Type</label>
+                <select id="recipe-type" required>
+                  <option value="">Select type</option>
+                  <option value="vegetarian">Vegetarian</option>
+                  <option value="vegan">Vegan</option>
+                  <option value="paleo">Paleo</option>
+                </select>
+              </div>
+              <div>
+                <label for="recipe-calories">Calories</label>
+                <input id="recipe-calories" type="number" min="1" required />
+              </div>
+              <div>
+                <label for="recipe-nutriscore">NutriScore</label>
+                <input
+                  id="recipe-nutriscore"
+                  type="number"
+                  min="1"
+                  max="100"
+                  required
+                />
+              </div>
+              <div>
+                <label for="recipe-rating">Rating</label>
+                <input
+                  id="recipe-rating"
+                  type="number"
+                  min="0"
+                  max="5"
+                  step="0.1"
+                  required
+                />
+              </div>
+              <div>
+                <label for="recipe-image">Image path</label>
+                <input
+                  id="recipe-image"
+                  type="text"
+                  value="../img/meals/meal-1.jpg"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn--full">Save recipe</button>
+            </form>
+
+            <div class="admin-toolbar">
+              <input id="recipe-search" type="search" placeholder="Search recipe by name..." />
+              <select id="recipe-type-filter">
+                <option value="all">All types</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="vegan">Vegan</option>
+                <option value="paleo">Paleo</option>
+              </select>
+            </div>
+
+            <h4 class="admin-list-title">Recipes list</h4>
+            <div id="recipe-list-admin" class="admin-list"></div>
+            <div class="admin-pagination" id="recipe-pagination"></div>
+          </div>
+
+          <div class="admin-card" id="user-management">
+            <div class="admin-card-header">
+              <h3 class="heading-tertiary">User management</h3>
+              <p>Create and maintain user access and roles.</p>
+            </div>
+            <form class="admin-form" id="user-form">
+              <input type="hidden" id="user-id" />
+              <div>
+                <label for="user-name">Full name</label>
+                <input id="user-name" type="text" required />
+              </div>
+              <div>
+                <label for="user-email">Email</label>
+                <input id="user-email" type="email" required />
+              </div>
+              <div>
+                <label for="user-role">Role</label>
+                <select id="user-role" required>
+                  <option value="">Select role</option>
+                  <option value="customer">Customer</option>
+                  <option value="manager">Manager</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn--full">Save user</button>
+            </form>
+
+            <div class="admin-toolbar">
+              <input id="user-search" type="search" placeholder="Search user by name or email..." />
+              <select id="user-role-filter">
+                <option value="all">All roles</option>
+                <option value="customer">Customer</option>
+                <option value="manager">Manager</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+
+            <h4 class="admin-list-title">Users list</h4>
+            <div id="user-list-admin" class="admin-list"></div>
+            <div class="admin-pagination" id="user-pagination"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast-stack" id="toast-stack"></div>
+    <script defer src="../js/admin.js"></script>
+    crify tone to sandelverify collapes to  drines  driving to wardiing to varitable  
+
+  extract data form variacts <datalist>  </datalist>
+  </body>
+</html>
+
